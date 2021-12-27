@@ -19,40 +19,43 @@ public class DealershipDatabase {
         }
     }
 
-    public void insertClient(String nume) {
+    public void insertClient(Client client) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO clienti(nume) VALUES (?)");
-            stmt.setString(1, nume);
+            stmt.setString(1, client.getNume());
             stmt.executeUpdate();
+            System.out.println("Successfully inserted client: " + client.toString());
         } catch (SQLException e) {
             System.err.println("Query failed. Reason: " + e.getMessage());
         }
     }
 
-    public void insertMasina(String marca, int an, float kilometraj, float pret, String culoare, String descriere) {
+    public void insertMasina(Masina masina) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO masini(marca, an, kilometraj, pret, culoare, descriere) VALUES (?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, marca);
-            stmt.setInt(2, an);
-            stmt.setFloat(3, kilometraj);
-            stmt.setFloat(4, pret);
-            stmt.setString(5, culoare);
-            stmt.setString(6, descriere);
+            stmt.setString(1, masina.getMarca());
+            stmt.setInt(2, masina.getAn());
+            stmt.setFloat(3, masina.getKilometraj());
+            stmt.setFloat(4, masina.getPret());
+            stmt.setString(5, masina.getCuloare());
+            stmt.setString(6, masina.getDescriere());
             stmt.executeUpdate();
+            System.out.println("Successfully inserted masina: " + masina.toString());
         } catch (SQLException e) {
             System.err.println("Query failed. Reason: " + e.getMessage());
         }
     }
 
-    public void insertComanda(int cantitate, StatusPlata status, int masina, int client) {
+    public void insertComanda(Comanda comanda) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO comenzi(data, cantitate, status, id_masina, id_client) VALUES (?, ?, ?, ?, ?)");
-            stmt.setTimestamp(1, new Timestamp(Instant.now().getEpochSecond() * 1000));
-            stmt.setInt(2, cantitate);
-            stmt.setString(3, status.toString());
-            stmt.setInt(4, masina);
-            stmt.setInt(5, client);
+            stmt.setTimestamp(1, comanda.getData());
+            stmt.setInt(2, comanda.getCantitate());
+            stmt.setString(3, comanda.getStatus().toString());
+            stmt.setInt(4, comanda.getIdMasina());
+            stmt.setInt(5, comanda.getIdClient());
             stmt.executeUpdate();
+            System.out.println("Successfully inserted comanda: " + comanda.toString());
         } catch (SQLException e) {
             System.err.println("Query failed. Reason: " + e.getMessage());
         }
