@@ -22,8 +22,12 @@ public class Comanda {
     }
 
     public Comanda(int id, int cantitate, StatusPlata status, int idMasina, int idClient) {
+        this(id, new Timestamp(Instant.now().getEpochSecond() * 1000), cantitate, status, idMasina, idClient);
+    }
+
+    public Comanda(int id, Timestamp timestamp, int cantitate, StatusPlata status, int idMasina, int idClient) {
         this.id = id;
-        this.data = new Timestamp(Instant.now().getEpochSecond() * 1000);
+        this.data = timestamp;
         this.cantitate = cantitate;
         this.status = status;
         this.idMasina = idMasina;

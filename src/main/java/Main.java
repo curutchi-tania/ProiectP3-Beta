@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,6 +11,9 @@ public class Main {
 //        db.insertMasina(masina);
 //        Comanda comanda = new Comanda(2, StatusPlata.ANULAT, 1, 3);
 //        db.insertComanda(comanda);
+        System.out.println(db.getClienti());
+        System.out.println(db.getMasini());
+        System.out.println(db.getComenzi());
         db.closeConnection();
     }
 }

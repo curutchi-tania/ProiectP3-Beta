@@ -1,6 +1,6 @@
 import java.sql.*;
-import java.time.Instant;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DealershipDatabase {
     private Connection conn;
@@ -17,6 +17,62 @@ public class DealershipDatabase {
         } catch (SQLException e) {
             System.err.println("Query failed. Reason: " + e.getMessage());
         }
+    }
+
+    public List<Client> getClienti() {
+        List<Client> clienti = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM clienti");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                clienti.add(new Client(rs.getInt("id"), rs.getString("nume")));
+            }
+        } catch (SQLException e) {
+            System.err.println("Couldn't get clienti. Reason: " + e.getMessage());
+        }
+        return clienti;
+    }
+
+    public List<Masina> getMasini() {
+        List<Masina> masini = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM masini");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                masini.add(new Masina(rs.getInt("id"),
+                        rs.getString("marca"),
+                        rs.getInt("an"),
+                        rs.getFloat("kilometraj"),
+                        rs.getFloat("pret"),
+                        rs.getString("culoare"),
+                        rs.getString("descriere")));
+            }
+        } catch (SQLException e) {
+            System.err.println("Couldn't get masini. Reason: " + e.getMessage());
+        }
+        return masini;
+    }
+
+    public List<Comanda> getComenzi() {
+        List<Comanda> comenzi = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM comenzi");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                comenzi.add(new Comanda(rs.getInt("id"),
+                        rs.getTimestamp("data"),
+                        rs.getInt("cantitate"),
+                        StatusPlata.valueOf(rs.getString("status")),
+                        rs.getInt("id_masina"),
+                        rs.getInt("id_client")));
+            }
+        } catch (SQLException e) {
+            System.err.println("Couldn't get clienti. Reason: " + e.getMessage());
+        }
+        return comenzi;
     }
 
     public void insertClient(Client client) {
