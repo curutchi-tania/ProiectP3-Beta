@@ -21,7 +21,7 @@ public class Application {
 
         for (Masina masina : masini) {
             JPanel masinaPanel = new JPanel();
-            masinaPanel.setBackground(Color.green);
+            masinaPanel.setBackground(Color.gray);
 
             JLabel marca = new JLabel(masina.getMarca());
             masinaPanel.add(marca);
