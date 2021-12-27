@@ -1,16 +1,21 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Connecting to db..");
         Connection conn = null;
         try {
-            String url = "jdbc:sqlite:path-to-db/chinook/chinook.db";
-            conn = DriverManager.getConnection(url);
+            String url = "jdbc:mysql://localhost:3306/dealership";
+            conn = DriverManager.getConnection(url, "tania", "parola123");
+
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM clienti");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println(rs.getInt("id"));
+                System.out.println(rs.getString("nume"));
+            }
+
             System.out.println("Connection was successful.");
         } catch (SQLException e) {
             System.err.println("Connection failed. Reason: " + e.getMessage());
