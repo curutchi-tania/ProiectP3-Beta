@@ -5,20 +5,6 @@ import java.util.List;
 public class DealershipDatabase {
     private Connection conn;
 
-    public void runQuery() {
-        try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM clienti");
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                System.out.println(rs.getInt("id"));
-                System.out.println(rs.getString("nume"));
-            }
-        } catch (SQLException e) {
-            System.err.println("Query failed. Reason: " + e.getMessage());
-        }
-    }
-
     public List<Client> getClienti() {
         List<Client> clienti = new ArrayList<>();
         try {
