@@ -12,6 +12,16 @@ public class Main {
 //        System.out.println(db.getMasini());
 //        System.out.println(db.getComenzi());
 //        db.closeConnection();
+
+        //Application application = new Application();
+        //application.run();
+
+        //FrameClienti frameClienti = new FrameClienti();
+        //frameClienti.runClienti();
+
+//        FrameComenzi frameComenzi = new FrameComenzi();
+//        frameComenzi.runComenzi();
+
         Application application = new Application();
         application.run();
     }
